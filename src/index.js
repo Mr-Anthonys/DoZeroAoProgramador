@@ -10,21 +10,26 @@
     PASSO 6 - adicinar a classe ativo no pokedev selecionado na listagem
 */
 
-const listaSelecaoPokedevs = document.querySelectorAll(".pokedevs");
+const listaSelecaoPokedevs = document.querySelectorAll(".pokemon");
 
 
 //Passo 2
 listaSelecaoPokedevs.forEach(pokedev => {
-    pokedev.addEventListener("click", () => {
+    pokedev.addEventListener("click", (event) => {
         esconderCartaoPokedev();
 
-        const idPokedevSelecionado = mostrarCartaoSelecionado(pokedev);
+        const idPokedevSelecionado = mostrarCartaoPokedevSelecionado(pokedev);
 
         desativarPokedevNaListagem();
-        ativarPokedevSelecionadoNaListagem(idPokedevSelecionado);
+        ativarPokedevSelecionadoNaListagem(event.target);
     })
 })
 
+
+function esconderCartaoPokedev() {
+	const cartaoPokedevAberto = document.querySelector(".aberto");
+	cartaoPokedevAberto.classList.remove("aberto");
+}
 
 function mostrarCartaoPokedevSelecionado(pokedev) {
 	const idPokedevSelecionado = pokedev.attributes.id.value;
@@ -34,12 +39,12 @@ function mostrarCartaoPokedevSelecionado(pokedev) {
 	return idPokedevSelecionado;
 }
 
-function esconderCartaoPokedev() {
-	const cartaoPokedevAberto = document.querySelector(".aberto");
-	cartaoPokedevAberto.classList.remove("aberto");
+function desativarPokedevNaListagem() {
+const pokedevParaDesativar = document.querySelector('.ativo')
+    pokedevParaDesativar.classList.remove('ativo')
 }
 
-function ativarPokedevSelecionadoNaListagem() {
-    const pokedevParaAtivar = document.querySelector('.ativo');
+function ativarPokedevSelecionadoNaListagem(pokedevParaAtivar) {
+    //const pokedevParaAtivar =  document.querySelector('.ativo');
     pokedevParaAtivar.classList.add("ativo");
 }
